@@ -29,8 +29,11 @@ public class InputReader
     public String getInput()
     {
         System.out.print("> ");         // print prompt
-        String inputLine = reader.nextLine();
+        String inputLine = reader.nextLine().toLowerCase();
+        
+        String[] arrayStrings = inputLine.split(" ");
+        String primeraPalabra = arrayStrings[0];
 
-        return inputLine;
+        return primeraPalabra;
     }
 }
