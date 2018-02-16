@@ -14,7 +14,7 @@ public class Responder
 {
     private Random aleatorio;
     private ArrayList <String> respuestas;
-    private HashMap<String, String> respuestasConClave;
+    private HashMap<HashSet<String>, String> respuestasConClave;
     /**
      * Construct a Responder - nothing to do
      */
@@ -23,10 +23,21 @@ public class Responder
         aleatorio = new Random();
         respuestas = new ArrayList<String>();
         respuestasConClave = new HashMap<>();
-        respuestasConClave.put("lento","Pruebe a desfragmentar el disco");
-        respuestasConClave.put("movil","Nuestro sistema solo es apto para ordenadores");
-        respuestasConClave.put("conexion","Compruebe que el cable de internet este conectado");
-        respuestasConClave.put("reparacion","Contacte con nosotros a traves de nuestro numero de telefono");
+        HashSet<String> set01 = new HashSet<>();
+        set01.add("muy");
+        set01.add("lento");
+        HashSet<String> set02 = new HashSet<>();
+        set02.add("muy");
+        HashSet<String> set03 = new HashSet<>();
+        set03.add("lento");
+        HashSet<String> set04 = new HashSet<>();
+        set04.add("necesita");
+        set04.add("una");
+        set04.add("reparacion");
+        respuestasConClave.put(set01,"Pruebe a desfragmentar el disco");
+        respuestasConClave.put(set02,"Podria especificar mejor?");
+        respuestasConClave.put(set03,"La velocidad es muy relativa");
+        respuestasConClave.put(set04,"Contacte con nosotros a traves de nuestro numero de telefono");
         respuestasPredeterminadas();
     }
 
@@ -37,10 +48,7 @@ public class Responder
     public String generateResponse(HashSet<String> respuestaUsuario)
     {
         String response = null;
-        Iterator<String> iterator = respuestaUsuario.iterator();
-        while(iterator.hasNext() && response == null){
-            response = respuestasConClave.get(iterator.next());
-        }
+        response = respuestasConClave.get(respuestaUsuario);
         return (response == null) ? respuestas.get(aleatorio.nextInt(respuestas.size())) : response;
     }
 
