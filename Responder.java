@@ -21,7 +21,6 @@ public class Responder
     public Responder()
     {
         aleatorio = new Random();
-        respuestas = new ArrayList<String>();
         respuestasConClave = new HashMap<>();
         HashSet<String> set01 = new HashSet<>();
         set01.add("muy");
@@ -49,11 +48,21 @@ public class Responder
     {
         String response = null;
         response = respuestasConClave.get(respuestaUsuario);
-        return (response == null) ? respuestas.get(aleatorio.nextInt(respuestas.size())) : response;
+        if (respuestas.size()>0){
+            if(response == null){ 
+                response = respuestas.remove(aleatorio.nextInt(respuestas.size()));
+            }
+        }
+        else{
+            response = ("Perdon, no le he entendido");
+        }
+
+        return response;
     }
 
     private void respuestasPredeterminadas()
     {
+        respuestas = new ArrayList<String>();
         respuestas.add("Eso suena interesante. Cuentame mas...");
         respuestas.add("Hablame acerca de tu consulta...");
         respuestas.add("Veamos como podria ayudarte...");
