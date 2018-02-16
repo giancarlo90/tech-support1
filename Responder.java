@@ -37,9 +37,10 @@ public class Responder
     public String generateResponse(HashSet<String> respuestaUsuario)
     {
         String response = null;
-        Iterator<String> iterator = respuestaUsuario.iterator(); 
-        String respuestaUsuarioString = iterator.next(); 
-        response = respuestasConClave.get(respuestaUsuarioString);
+        Iterator<String> iterator = respuestaUsuario.iterator();
+        while(iterator.hasNext() && response == null){
+            response = respuestasConClave.get(iterator.next());
+        }
         return (response == null) ? respuestas.get(aleatorio.nextInt(respuestas.size())) : response;
     }
 
